@@ -15,8 +15,9 @@ class PokeApi {
 
     if (pokeList is List) {
       _list = pokeList.map((e) => PokemonModel.fromJson(e)).toList();
+    } else {
+      return [];
     }
-    debugPrint(_list.first.toString());
     return _list;
   }
 }
