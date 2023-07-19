@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pokemon_app/services/pokedex_api.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pokemon_app/ui/pages/homePage.dart';
 
 void main() {
@@ -12,14 +13,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Pokedex',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return ScreenUtilInit(
+      designSize:  const Size(393, 851),
+      builder: (BuildContext context, child) => MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Pokedex',
+        theme: ThemeData.dark().copyWith(
+          textTheme: GoogleFonts.latoTextTheme()
+        ),
+        home: const HomePage(),
       ),
-      home: const HomePage(),
     );
   }
 }
