@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pokemon_app/ui/widgets/pokeItems.dart';
 
 import '../../models/pokemonModel.dart';
 import '../../services/pokedex_api.dart';
@@ -11,11 +13,9 @@ class PokemonList extends StatefulWidget {
 }
 
 class _PokemonListState extends State<PokemonList> {
-
   late Future<List<PokemonModel>> _pokemonList;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _pokemonList = PokeApi.getPokemonData();
   }
@@ -28,16 +28,17 @@ class _PokemonListState extends State<PokemonList> {
         if (snapshot.hasData) {
           List<PokemonModel> _liste = snapshot.data!;
 
-          return ListView.builder(
-              itemCount: _liste.length,
-              itemBuilder: (context, index){
-                var gecerliPokemon = _liste[index];
-                return ListTile(
-                  title: Text(gecerliPokemon.name.toString()),
-                );
-              });
+          return GridView.builder(
+            itemCount: _liste.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount:
+                    ScreenUtil().orientation == Orientation.portrait ? 2 : 4),
+            itemBuilder: (context, index) => PokeItems(pokemon: _liste[index]),
+          );
         } else if (snapshot.hasError) {
-          return const Center(child: Text("hata çıktı"),);
+          return const Center(
+            child: Text("hata çıktı"),
+          );
         } else {
           return const Center(
             child: CircularProgressIndicator(),
