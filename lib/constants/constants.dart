@@ -1,33 +1,43 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Constants {
   Constants._();
   static const String title = "Pokedex";
 
   static TextStyle getTitleStyle() {
-    return const TextStyle(
+    return TextStyle(
       color: Colors.white,
       fontWeight: FontWeight.bold,
-      fontSize: 48,
+      fontSize: _calculateFontSize(42),
     );
   }
 
   static const String pokemonUrl = "images/pokeball.png";
 
   static TextStyle getPokeNameStyle() {
-    return const TextStyle(
+    return TextStyle(
       color: Colors.white,
       fontWeight: FontWeight.bold,
-      fontSize: 30,
+      fontSize: _calculateFontSize(20),
     );
   }
 
   static TextStyle getPokeTypeStyle() {
-    return const TextStyle(
+    return  TextStyle(
       color: Colors.white,
-      fontSize: 20,
+      fontSize: _calculateFontSize(15),
     );
+  }
+
+
+  static _calculateFontSize(int size){
+    if(ScreenUtil().orientation == Orientation.portrait){
+      return size.sp;
+    }else{
+      return (size*0.65).sp;
+    }
   }
 }
