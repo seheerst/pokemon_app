@@ -37,7 +37,23 @@ class Constants {
     if(ScreenUtil().orientation == Orientation.portrait){
       return size.sp;
     }else{
-      return (size*0.65).sp;
+      return (size*0.45).sp;
     }
+  }
+
+  static TextStyle PokeNameStyle() {
+    return TextStyle(
+      color: Colors.white,
+      fontWeight: FontWeight.bold,
+      fontSize: _calculateFontSize(25),
+    );
+  }
+
+  static getInfoLabelStyle() {
+    return TextStyle(fontSize: _calculateFontSize(20),fontWeight: FontWeight.bold,color: Colors.black);
+  }
+
+  static getInfoTextStyle() {
+    return TextStyle(fontSize: _calculateFontSize(16),color: Colors.black);
   }
 }
